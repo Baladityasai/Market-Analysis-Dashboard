@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="description" content="Marketing Campaign Analytics Dashboard — track KPIs, funnel performance, channel attribution, and campaign trends in real time." />
+  <title>Marketing Campaign Analytics — Dashboard</title>
+  <link rel="stylesheet" href="index.css" />
+</head>
+<body>
+
+  <!-- ======== Top Bar ======== -->
+  <header class="topbar" id="topbar">
+    <div class="topbar-brand">
+      <div class="topbar-logo">M</div>
+      <div>
+        <div class="topbar-title">Campaign Analytics</div>
+        <div class="topbar-subtitle">Real-Time Marketing Intelligence</div>
+      </div>
+    </div>
+    <div class="topbar-filters">
+      <div class="filter-group">
+        <label for="channel-filter">Channel</label>
+        <select id="channel-filter">
+          <option value="All">All Channels</option>
+          <option value="Paid Search">Paid Search</option>
+          <option value="Social">Social</option>
+          <option value="Email">Email</option>
+          <option value="Organic">Organic</option>
+          <option value="Display">Display</option>
+        </select>
+      </div>
+      <div class="filter-group">
+        <label for="start-date">From</label>
+        <input type="date" id="start-date" value="2025-01-01" />
+      </div>
+      <div class="filter-group">
+        <label for="end-date">To</label>
+        <input type="date" id="end-date" value="2025-09-30" />
+      </div>
+    </div>
+  </header>
+
+  <!-- ======== Dashboard Content ======== -->
+  <main class="dashboard" id="dashboard">
+
+    <!-- KPI Cards -->
+    <section class="kpi-row" id="kpi-row">
+      <div class="kpi-card animate-in" id="kpi-spend">
+        <div class="kpi-label">Total Ad Spend</div>
+        <div class="kpi-value" id="kpi-spend-value">—</div>
+        <div class="kpi-change neutral" id="kpi-spend-change">—</div>
+        <div class="kpi-icon">💰</div>
+      </div>
+      <div class="kpi-card animate-in" id="kpi-revenue">
+        <div class="kpi-label">Total Revenue</div>
+        <div class="kpi-value" id="kpi-revenue-value">—</div>
+        <div class="kpi-change neutral" id="kpi-revenue-change">—</div>
+        <div class="kpi-icon">📈</div>
+      </div>
+      <div class="kpi-card animate-in" id="kpi-ctr">
+        <div class="kpi-label">Avg. CTR</div>
+        <div class="kpi-value" id="kpi-ctr-value">—</div>
+        <div class="kpi-change neutral" id="kpi-ctr-change">—</div>
+        <div class="kpi-icon">🎯</div>
+      </div>
+      <div class="kpi-card animate-in" id="kpi-cvr">
+        <div class="kpi-label">Avg. CVR</div>
+        <div class="kpi-value" id="kpi-cvr-value">—</div>
+        <div class="kpi-change neutral" id="kpi-cvr-change">—</div>
+        <div class="kpi-icon">🔄</div>
+      </div>
+      <div class="kpi-card animate-in" id="kpi-cpl">
+        <div class="kpi-label">Avg. CPL</div>
+        <div class="kpi-value" id="kpi-cpl-value">—</div>
+        <div class="kpi-change neutral" id="kpi-cpl-change">—</div>
+        <div class="kpi-icon">💵</div>
+      </div>
+      <div class="kpi-card animate-in" id="kpi-roas">
+        <div class="kpi-label">ROAS</div>
+        <div class="kpi-value" id="kpi-roas-value">—</div>
+        <div class="kpi-change neutral" id="kpi-roas-change">—</div>
+        <div class="kpi-icon">🚀</div>
+      </div>
+    </section>
+
+    <!-- Charts Grid -->
+    <div class="section-header">
+      <h2>Performance Overview</h2>
+      <div class="divider"></div>
+      <span class="section-badge">Charts</span>
+    </div>
+    <section class="charts-grid" id="charts-grid">
+      <div class="chart-card animate-in">
+        <h3>Channel Performance</h3>
+        <p class="chart-subtitle">Impressions, clicks, and conversions by marketing channel</p>
+        <canvas id="chart-channel-perf"></canvas>
+      </div>
+      <div class="chart-card animate-in">
+        <h3>Spend vs Revenue Trend</h3>
+        <p class="chart-subtitle">Weekly ad spend compared to attributed revenue</p>
+        <canvas id="chart-spend-revenue"></canvas>
+      </div>
+      <div class="chart-card animate-in">
+        <h3>Budget Distribution</h3>
+        <p class="chart-subtitle">How marketing budget is allocated across channels</p>
+        <canvas id="chart-budget-mix"></canvas>
+      </div>
+      <div class="chart-card animate-in">
+        <h3>Weekly Trends</h3>
+        <p class="chart-subtitle">Click-through and conversion trends week over week</p>
+        <canvas id="chart-weekly-trend"></canvas>
+      </div>
+      <div class="chart-card animate-in">
+        <h3>Campaign Comparison Radar</h3>
+        <p class="chart-subtitle">Multi-KPI radar overlay for top campaigns</p>
+        <canvas id="chart-radar"></canvas>
+      </div>
+      <div class="chart-card animate-in">
+        <h3>ROI by Campaign</h3>
+        <p class="chart-subtitle">Return on investment ranking across all campaigns</p>
+        <canvas id="chart-roi-bar"></canvas>
+      </div>
+    </section>
+
+    <!-- Funnel Section -->
+    <div class="section-header">
+      <h2>Conversion Funnel</h2>
+      <div class="divider"></div>
+      <span class="section-badge">Funnel</span>
+    </div>
+    <section class="funnel-section">
+      <div class="funnel-container animate-in" id="funnel-container">
+        <div class="funnel-stages" id="funnel-stages">
+          <!-- Populated by JS -->
+        </div>
+      </div>
+    </section>
+
+    <!-- Campaign Table -->
+    <div class="section-header">
+      <h2>Campaign Scorecard</h2>
+      <div class="divider"></div>
+      <span class="section-badge">Table</span>
+    </div>
+    <section class="table-section">
+      <div class="table-container animate-in">
+        <table class="campaign-table" id="campaign-table">
+          <thead>
+            <tr>
+              <th data-sort="name">Campaign <span class="sort-icon">⇅</span></th>
+              <th data-sort="channel">Channel <span class="sort-icon">⇅</span></th>
+              <th data-sort="impressions">Impressions <span class="sort-icon">⇅</span></th>
+              <th data-sort="clicks">Clicks <span class="sort-icon">⇅</span></th>
+              <th data-sort="leads">Leads <span class="sort-icon">⇅</span></th>
+              <th data-sort="customers">Customers <span class="sort-icon">⇅</span></th>
+              <th data-sort="spend">Spend <span class="sort-icon">⇅</span></th>
+              <th data-sort="ctr">CTR <span class="sort-icon">⇅</span></th>
+              <th data-sort="roi">ROI <span class="sort-icon">⇅</span></th>
+              <th data-sort="status">Status <span class="sort-icon">⇅</span></th>
+            </tr>
+          </thead>
+          <tbody id="campaign-table-body">
+            <!-- Populated by JS -->
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Insights Panel -->
+    <div class="section-header">
+      <h2>AI-Generated Insights</h2>
+      <div class="divider"></div>
+      <span class="section-badge">Recommendations</span>
+    </div>
+    <section class="insights-section">
+      <div class="insights-grid" id="insights-grid">
+        <!-- Populated by JS -->
+      </div>
+    </section>
+
+  </main>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.4/dist/chart.umd.min.js"></script>
+  <script src="data.js"></script>
+  <script src="charts.js"></script>
+  <script src="dashboard.js"></script>
+</body>
+</html>
